@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('template.index');
 });
 
 Route::get('/dashboard', function () {
@@ -38,5 +38,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/index', [App\Http\Controllers\VendorController::class, 'Vendor'])->name('index');
 });
+
 
 require __DIR__.'/auth.php'; 

@@ -70,7 +70,7 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#team">Team</a></li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                 <li><a href="#">Dropdown 1</a></li>
                 <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -86,7 +86,7 @@
                 <li><a href="#">Dropdown 3</a></li>
                 <li><a href="#">Dropdown 4</a></li>
               </ul>
-            </li>
+            </li> --}}
 
             <!-- Megamenu 2 -->
             <li class="megamenu-2"><a href="#"><span>Megamenu</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -177,7 +177,7 @@
                 <div class="tab-content">
 
                   <!-- Enterprise Software Tab -->
-                  <div class="tab-pane fade show active" id="2190-tab-1" role="tabpanel" aria-labelledby="2190-tab-1-tab">
+                  {{-- <div class="tab-pane fade show active" id="2190-tab-1" role="tabpanel" aria-labelledby="2190-tab-1-tab">
                     <div class="content-grid">
                       <div class="product-section">
                         <h4>Core Solutions</h4>
@@ -244,7 +244,8 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
+                  
 
                   <!-- Development Tools Tab -->
                   <div class="tab-pane fade" id="2190-tab-2" role="tabpanel" aria-labelledby="2190-tab-2-tab">
@@ -428,16 +429,38 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                             Profile
               </a>
-                <ul class="dropdown-menu" style="width:30%">
-                  <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li>
+                <ul class="dropdown-menu" style="width:20%">
+                  {{-- <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li> --}}
                   {{-- <li><a class="dropdown-item" href="#">{{ Auth::user()->email }}</a></li> --}}
                     <li>
-                      <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                          <button type="submit" class="dropdown-item">
+                      @if (Route::has('login'))
+                        @auth
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item" style="background: none; border: none; padding: 0;">
                                 <i class="fas fa-sign-out-alt me-1"></i> Logout
-                          </button>
-                      </form>
+                            </button>
+                        </form>
+                                            
+                     
+                        
+                    @else
+                        <a
+                            href="{{ route('login') }}"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC]  hover:text-sm leading-normal"
+                        >
+                            Log in
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a
+                                href="{{ route('register') }}"
+                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] hover:text-sm leading-normal" style="color:blue">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+            @endif
                 </li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
